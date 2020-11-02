@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="content-main">
+  <div class="row">
+    <div class="col text-right">
+      <button routerLink="/producto/nuevo" class="btn btn-primary">
+        <i class="fa fa-plus">Agregar Produto</i>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col col-md-12">
+      <table class="table mt-3" datatable>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productos; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.nombre}}</td>
+            <td>{{product.cantidad}}</td>
+            <td>{{product.descripcion}}</td>
+            <td>
+              <button routerLink="/productos/{{product.idProducto}}" class="btn"><i class="fa fa-edit"></i>Detalles</button>
+              <button (click)="modalDelete(removeProduct,product)" class="btn"><i class="fa fa-trash"></i>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #removeProduct let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="delete()" #formUpdate="ngForm">
+    <div class="modal-body text-center">
+      <h3>¿Realmente Deseas eliminar  {{productRemove.nombre}} ?</h3>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Eliminar</button>
+    </div>
+  </form>
+</ng-template>
+<app-footer></app-footer>

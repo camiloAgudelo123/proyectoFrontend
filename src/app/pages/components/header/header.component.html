@@ -1,0 +1,69 @@
+<div class="headerlogo">
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div>
+      <h1>
+        <a routerLink="/productos">
+          <img src="../../../assets/images/logo.png" alt="Politécnico Colombiano Jaime Isaza Cadavid" class="logo" />
+        </a>
+      </h1>
+    </div>
+  </header>
+</div>
+<div class="menu">
+  <ul>
+    <li class="main-item" routerLink="/inicio" id="home">
+      <div>
+        <i class="fa fa-home"></i>
+      </div>
+      <a>Inicio</a>
+    </li>
+    <div class="liner"></div>
+    <li class="main-item" routerLink="/usuarios" id="recepcion">
+      <div>
+        <i class="fa fa-users"></i>
+      </div>
+      <a>Usuarios</a>
+    </li>
+    <div class="liner"></div>
+    <li class="main-item" routerLink="/productos" id="facturas">
+      <div>
+        <i class="fa fa-product-hunt"></i>
+      </div>
+      <a>Productos</a>
+    </li>
+    <div class="liner"></div>
+    <li class="main-item" routerLink="/laboratorios" id="inventario">
+      <div>
+        <i class="fa fa-flask"></i>
+      </div>
+      <a>Laboratorios</a>
+    </li>
+    <div class="liner"></div>
+    <li class="main-item" routerLink="/practicas" id="habitaciones">
+      <div>
+        <i class="fa fa-calendar"></i>
+      </div>
+      <a>Practicas</a>
+    </li>
+    <div class="liner"></div>
+    <li class="main-item" onClick="goTo(this.id)" id="configuraciones">
+      <div>
+        <i class="fa fa-cogs"></i>
+      </div>
+      <a>Configuraciones</a>
+    </li>
+    <div class="liner"></div>
+  </ul>
+</div>
+
+
+<nav class="navbar-container w-100 bg-white">
+  <div class="text-content-navbar py-2 d-flex justify-content-between align-items-center">
+    <p class="font-weight-bold">Bienvenido: Admistrador </p>
+    <div class="singout-navbar" id="logOut">
+      <a>Cerrar sesion <i class="fa fa-sign-out"></i></a>
+    </div>
+  </div>
+  <div class="liner-navbar"></div>
+</nav>

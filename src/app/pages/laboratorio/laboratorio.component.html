@@ -1,0 +1,120 @@
+<app-header></app-header>
+<div class="content-main">
+
+  <div class="row">
+    <div class="col col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Crear Laboratorio</h5>
+          <form (ngSubmit)="save(f)" #f="ngForm">
+            <div class="form-group">
+              <label for="nombreLaboratorio">Nombre del Laboratorio:</label>
+              <input type="text" class="form-control" id="nombreLaboratorio" placeholder="Quimica"
+                name="nombreLaboratorio" [(ngModel)]="laboratorio.nombreLaboratorio">
+            </div>
+            <div class="form-group">
+              <label for="aula">Aula</label>
+              <input type="text" class="form-control" id="aula" placeholder="Aula 101" name="aula"
+                [(ngModel)]="laboratorio.aula">
+            </div>
+            <div class="form-group">
+              <label for="idUsuario">Coordinador del laboratorio</label>
+              <select class="form-control" id="idUsuario" name="idUsuario" [(ngModel)]="laboratorio.idCoordinador">
+                <option *ngFor="let user of coordinadores;let i = index" value="{{user.idUsuario}}">
+                  {{user.nombreUsuario}} {{user.apellidoUsuario}}</option>
+              </select>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary w-20">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-md-8">
+      <table class="table mt-3" datatable>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Aula</th>
+            <th scope="col">Coordinador</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lab of laboratorios; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{lab.nombreLaboratorio}}</td>
+            <td>{{lab.aula}}</td>
+            <td>GET Coordinador</td>
+            <td>
+              <button (click)="viewUpdate(content,i)" class="btn"><i class="fa fa-edit"></i>Editar</button>
+              <button (click)="modalDelete(removeUser,lab)" class="btn"><i class="fa fa-trash"></i>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Modificar Laboratorio</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="update(formUpdate)" #formUpdate="ngForm">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="nombreLaboratorioUpdate">Nombre del Laboratorio:</label>
+          <input type="text" class="form-control" id="nombreLaboratorioUpdate" placeholder="Quimica" name="nombreLaboratorio"
+            [(ngModel)]="laboratorioUpdate.nombreLaboratorio">
+        </div>
+        <div class="form-group">
+          <label for="aulaUpdate">Aula</label>
+          <input type="text" class="form-control" id="aulaUpdate" placeholder="Aula 101" name="aula"
+            [(ngModel)]="laboratorioUpdate.aula">
+        </div>
+        <div class="form-group">
+          <label for="idUsuarioUpdate">Coordinador del laboratorio</label>
+          <select class="form-control" id="idUsuarioUpdate" name="idUsuario" [(ngModel)]="laboratorioUpdate.idCoordinador">
+            <option *ngFor="let user of coordinadores;let i = index" value="{{user.idUsuario}}">{{user.nombreUsuario}}
+              {{user.apellidoUsuario}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Guardar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #removeUser let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"></h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="delete()" #formUpdate="ngForm">
+      <div class="modal-body text-center">
+        <h3>¿Realmente Deseas eliminar  {{laboratorioDelete.nombreLaboratorio}}?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Eliminar</button>
+      </div>
+    </form>
+  </ng-template>
+</div>
+<app-footer></app-footer>

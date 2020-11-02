@@ -1,0 +1,517 @@
+<app-header></app-header>
+<div class="content-main">
+  <div class="row text-right">
+    <div class="col">
+      <button routerLink="/productos" class="btn btn-danger">
+        <i class="fa fa-arrow-left"></i>
+        Regresar
+      </button>
+    </div>
+  </div>
+  <hr>
+  <form (ngSubmit)="save(form)" #form="ngForm">
+    <h1 class="text-center">Creación de Productos</h1>
+    <h4 class="text-center"><small>Información del producto</small></h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="producto.nombre" name="nombre">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="estado">Estado</label>
+        <input type="text" class="form-control" id="estado" [(ngModel)]="producto.estado" name="estado">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="composicion">Composición química:</label>
+        <input type="text" class="form-control" id="composicion" [(ngModel)]="producto.composicionQuimica"
+          name="composicionQuimica">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="desProduct">Descripción:</label>
+        <textarea class="form-control" id="desProduct" rows="3" [(ngModel)]="producto.descripcion" name="descripcion"></textarea>
+      </div>
+    </div>
+
+    <h4 class="text-center"><small>Características fisicoquímicas</small></h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="color">Color</label>
+        <input type="text" class="form-control" id="color" placeholder="Azul" [(ngModel)]="producto.color" name="color">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="olor">Olor</label>
+        <input type="text" class="form-control" id="olor" placeholder="" [(ngModel)]="producto.olor" name="olor">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="ph">PH</label>
+        <input type="text" class="form-control" id="ph" [(ngModel)]="producto.ph" name="ph">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="ph">Punto de inflamación</label>
+        <input type="text" class="form-control" id="ph"
+          placeholder="Información en grados o texto descriptivo para cuando no aplica"
+          [(ngModel)]="producto.puntoInflamacion" name="puntoInflamacion">
+      </div>
+    </div>
+
+    <h4 class="text-center"><small>Inventario</small></h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="cantidadDisponible">Cantidad Disponible</label>
+        <input type="text" class="form-control" id="cantidadDisponible" [(ngModel)]="producto.cantidad"
+          name="cantidad">
+      </div>
+    </div>
+
+    <h4 class="text-center"><small>Información del Fabricante</small></h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombreFabricante">Nombre</label>
+        <input type="text" class="form-control" id="nombreFabricante" [(ngModel)]="producto.fabricante"
+          name="fabricante">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="telefono">telefono</label>
+        <input type="text" class="form-control" id="telefono" [(ngModel)]="producto.numeroFabricante"
+          name="numeroFabricante">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="paginaWeb">Página Web:</label>
+        <input type="text" class="form-control" id="paginaWeb" [(ngModel)]="producto.paginaFabricante"
+          name="paginaFabricante">
+      </div>
+    </div>
+
+
+    <h4 class="text-center"><small>Gestión del riego químico</small></h4>
+    <h6><small>Clasificación de peligrosidad NTC 1692 (Naciones Unidas)</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="peligo1">Peligro 1</label>
+        <select class="custom-select custom-select-lg mb-3" id="peligo1">
+          <option selected>Seleciona el peligro Nº 1</option>
+          <option value="1">One</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="peligo2">Peligro 2</label>
+        <select class="custom-select custom-select-lg mb-3" id="peligo2">
+          <option selected>Seleciona el peligro Nº 2</option>
+          <option value="1">One</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="peligo3">Peligro 3</label>
+        <select class="custom-select custom-select-lg mb-3" id="peligo3">
+          <option selected>Seleciona el peligro Nº 3</option>
+          <option value="1">One</option>
+        </select>
+      </div>
+    </div>
+
+    <h6><small>Número de identificación internacional</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="gre">GRE</label>
+        <input type="text" class="form-control" id="gre">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="numeroUn">Numero UN</label>
+        <input type="text" class="form-control" id="numeroUn">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="cas">CAS</label>
+        <input type="text" class="form-control" id="cas">
+      </div>
+    </div>
+
+    <h6><small>Carcinógeno</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="carcinogeno">Carcinógeno?</label>
+        <select class="custom-select custom-select-lg mb-3" id="carcinogeno">
+          <option selected>Si</option>
+          <option value="1">No</option>
+        </select>
+      </div>
+    </div>
+    <!-- TO DO Categoría IARC: Grupo de valores (1, 2A, 2B, 3, 4, N/A)
+Categoría ACGIH: -->
+
+    <h6><small>NFPA</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="salud">Salud:</label>
+        <select class="custom-select custom-select-lg mb-3" id="salud">
+          <option selected>1</option>
+          <option value="1">2</option>
+          <option value="1">3</option>
+          <option value="1">4</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inflamabilidad">Inflamabilidad::</label>
+        <select class="custom-select custom-select-lg mb-3" id="inflamabilidad">
+          <option selected>1</option>
+          <option value="1">2</option>
+          <option value="1">3</option>
+          <option value="1">4</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="reactividad">Reactividad</label>
+        <select class="custom-select custom-select-lg mb-3" id="reactividad">
+          <option selected>1</option>
+          <option value="1">2</option>
+          <option value="1">3</option>
+          <option value="1">4</option>
+        </select>
+      </div>
+      <!-- TO DO simbolos reactivos  -->
+      <div class="form-group col-md-6">
+        <label for="especifico">Especifico:</label>
+        <select class="custom-select custom-select-lg mb-3" id="especifico">
+          <option selected>1</option>
+          <option value="1">2</option>
+          <option value="1">3</option>
+          <option value="1">4</option>
+        </select>
+      </div>
+    </div>
+
+
+    <h6><small>Sistema Globalmente Armonizado</small></h6>
+    Físico:
+    <div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="explosivos" value="explosivos">
+        <label class="form-check-label" for="explosivos">Explosivos</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inflamable," value="inflamable">
+        <label class="form-check-label" for="inflamable">Inflamable</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="comburente" value="comburente">
+        <label class="form-check-label" for="comburente">Comburente</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="gasPresion" value="gasPresion">
+        <label class="form-check-label" for="gasPresion">Gas a presión</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="corrosivoMetales" value="corrosivoMetales">
+        <label class="form-check-label" for="corrosivoMetales">Corrosivo para metales</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="na" value="na">
+        <label class="form-check-label" for="na">N.A</label>
+      </div>
+    </div>
+    <br>
+    Ambiental:
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <select class="custom-select custom-select-lg mb-3" id="ambiental">
+          <option selected>Peligro para el medio ambiente acuático</option>
+          <option value="1">Peligro para la capa de ozono</option>
+          <option value="1">N.A</option>
+        </select>
+      </div>
+    </div>
+
+    Salud:
+    <div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="mortalToxico" value="mortalToxico">
+        <label class="form-check-label" for="mortalToxico">Mortal/Toxico</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="corrosivoPiel," value="corrosivoPiel">
+        <label class="form-check-label" for="corrosivoPiel">Corrosivo para la piel</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="comburente" value="comburente">
+        <label class="form-check-label" for="comburente">Comburente</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Nocivo" value="Nocivo">
+        <label class="form-check-label" for="Nocivo">Nocivo</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="peligroSalud" value="peligroSalud">
+        <label class="form-check-label" for="peligroSalud">Peligroso para la salud</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="SaludNA" value="SaludNA">
+        <label class="form-check-label" for="SaludNA">N.A</label>
+      </div>
+    </div>
+    <br>
+
+
+    <h6><small>Estabilidad y reactividad</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="reactividadTXT">Reactividad:</label>
+        <textarea class="form-control" id="reactividadTXT" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="estabilidadQuimica">Estabilidad química:</label>
+        <textarea class="form-control" id="estabilidadQuimica" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="reaccionesPeligrosas">Reacciones peligrosas:</label>
+        <textarea class="form-control" id="reaccionesPeligrosas" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="sustanciasIncopatibles">Sustancias incompatibles:</label>
+        <textarea class="form-control" id="sustanciasIncopatibles" rows="3"></textarea>
+      </div>
+    </div>
+
+
+    <h6><small>Límites permisibles de exposición ACGIH – OHSA</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="twa">TWA</label>
+        <input type="text" class="form-control" id="twa">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="stel">STEL</label>
+        <input type="text" class="form-control" id="stel">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="tlv_c">TLV-C:</label>
+        <input type="text" class="form-control" id="tlv_c">
+      </div>
+    </div>
+
+
+    <h6><small>Identificación de peligros</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inhalacionPeligro">Inhalación:</label>
+        <textarea class="form-control" id="inhalacionPeligro" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="ingestionPeligro">Ingestión:</label>
+        <textarea class="form-control" id="ingestionPeligro" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="pielPeligro">Piel:</label>
+        <textarea class="form-control" id="pielPeligro" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="ojosPeligro">Ojos:</label>
+        <textarea class="form-control" id="ojosPeligro" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="efectosCronicos">Efectos crónicos:</label>
+        <textarea class="form-control" id="efectosCronicos" rows="3"></textarea>
+      </div>
+    </div>
+
+
+    <h6><small>Medidas preventivas > Elementos de protección personal</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mpRespiratoria">Respiratoria:</label>
+        <textarea class="form-control" id="mpRespiratoria" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="mpManos">Manos:</label>
+        <textarea class="form-control" id="mpManos" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mpOjos">Ojos:</label>
+        <textarea class="form-control" id="mpOjos" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="mpPiel">Piel:</label>
+        <textarea class="form-control" id="mpPiel" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mpHigiene">Medidas de higiene:</label>
+        <textarea class="form-control" id="mpHigiene" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="mpControlIngenieria">Controles de ingeniería</label>
+        <textarea class="form-control" id="mpControlIngenieria" rows="3"></textarea>
+      </div>
+    </div>
+
+
+    <h6><small>Medidas preventivas > Condiciones seguras de almacenamiento y manipulación</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="almacenamiento">Almacenamiento:</label>
+        <textarea class="form-control" id="almacenamientos" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="manipulacion">Manipulación:</label>
+        <textarea class="form-control" id="manipulacion" rows="3"></textarea>
+      </div>
+    </div>
+
+
+    <h6><small>Atención de emergencias > Primeros Auxilios</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="prInhalacion">Inhalación:</label>
+        <textarea class="form-control" id="almacenamientos" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="prIngestion">Ingestión:</label>
+        <textarea class="form-control" id="prIngestion" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="prContactoPiel">Contacto piel:</label>
+        <textarea class="form-control" id="prContactoPiel" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="prContactoOjos">Contacto ojos:</label>
+        <textarea class="form-control" id="prContactoOjos" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="prOtrasMedidas">Otras Medidas:</label>
+        <textarea class="form-control" id="prOtrasMedidas" rows="3"></textarea>
+      </div>
+    </div>
+
+
+    <h6><small>Atención de emergencias > Medidas contra incendios</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="aeIncendio">Peligros específicos incendio:</label>
+        <textarea class="form-control" id="aeIncendio" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="aeSalud">Peligros específicos para la salud:</label>
+        <textarea class="form-control" id="prIngestion" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="aeLuchaIncendio">Recomendaciones del personal de lucha contra incendio:</label>
+        <textarea class="form-control" id="aeLuchaIncendio" rows="3"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="aeAgenteExtindor">Agente extintor:</label>
+        <textarea class="form-control" id="prContactoOjos" rows="3"></textarea>
+      </div>
+    </div>
+
+    <h6><small>Atención de emergencias > Control de derrames o fugas</small></h6>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="aeDerrames">Precauciones personales, equipo de protección y medio ambiente:</label>
+        <textarea class="form-control" id="aeDerrames" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="aeContencion">Métodos y material de contención y limpieza:</label>
+        <textarea class="form-control" id="aeContencion" rows="5"></textarea>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fichaSeguridadFisica">Cuenta con ficha de seguridad fisica?</label>
+        <select class="custom-select custom-select-lg" id="fichaSeguridadFisica">
+          <option selected>Si</option>
+          <option value="1">NO</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="tarjetaEmergenciaFisica">Cuenta con tarjeta de emergencia fisica?</label>
+        <select class="custom-select custom-select-lg" id="tarjetaEmergenciaFisica">
+          <option selected>Si</option>
+          <option value="1">NO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="palabrasAdvertencia">Palabras de advertencia</label>
+        <input type="text" class="form-control" id="palabrasAdvertencia">
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fraseH1">Frase H 1</label>
+        <select class="custom-select custom-select-lg" id="fraseH1">
+          <option selected>Si</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="fraseH2">Frase H 2s</label>
+        <select class="custom-select custom-select-lg" id="fraseH2">
+          <option selected>Si</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fraseP1">Frase P 1</label>
+        <select class="custom-select custom-select-lg" id="fraseP1">
+          <option selected>Si</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="fraseP2">Frase P 2s</label>
+        <select class="custom-select custom-select-lg" id="fraseP">
+          <option selected>Si</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Imagen con el código QR asociado</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </div>
+
+
+
+    <div class="col text-center">
+      <button type="submit" class="btn btn-primary">Guardar Producto</button>
+    </div>
+  </form>
+  <br><br><br><br>
+</div>

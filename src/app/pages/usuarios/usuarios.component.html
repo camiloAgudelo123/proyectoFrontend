@@ -1,0 +1,141 @@
+<app-header></app-header>
+<div class="content-main">
+
+  <div class="row">
+    <div class="col col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Crear Usuario</h5>
+          <form (ngSubmit)="save(f)" #f="ngForm">
+            <div class="form-group">
+              <label for="nombreUsuario">Nombres:</label>
+              <input type="text" class="form-control" id="nombreUsuario" placeholder="Juan" name="nombreUsuario"
+                [(ngModel)]="usuario.nombreUsuario">
+            </div>
+            <div class="form-group">
+              <label for="apellidoUsuario">Apellidos</label>
+              <input type="text" class="form-control" id="apellidoUsuario" placeholder="Herrera" name="apellidoUsuario"
+                [(ngModel)]="usuario.apellidoUsuario">
+            </div>
+            <div class="form-group">
+              <label for="correoUsuario">Correo</label>
+              <input type="text" class="form-control" id="correoUsuario" value="ejemplo@poli.com" name="correoUsuario"
+                [(ngModel)]="usuario.correoUsuario">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Rol del Usuario</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option value="1">Coordinador</option>
+                <option value="2">Administrador</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Laboratorio a Coornidar</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option *ngFor="let lab of laboratorios;let i = index" value="{{lab.idLaboratorio}}">
+                  {{lab.nombreLaboratorio}}</option>
+              </select>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary w-20">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-8">
+      <table class="table mt-3 " datatable>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usuarios; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{user.nombreUsuario}}</td>
+            <td>{{user.apellidoUsuario}}</td>
+            <td>
+              <button (click)="viewUpdate(content,i)" class="btn"><i class="fa fa-edit"></i>Editar</button>
+              <button (click)="modalDelete(removeUser,user)" class="btn"><i class="fa fa-trash"></i>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Modificar Usuario</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="update(formUpdate)" #formUpdate="ngForm">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="nombreUsuarioUpdate">Nombres:</label>
+          <input type="text" class="form-control" id="nombreUsuarioUpdate" placeholder="Juan" name="nombreUsuario"
+            [(ngModel)]="usuarioUpdate.nombreUsuario">
+        </div>
+        <div class="form-group">
+          <label for="apellidoUsuarioUpdate">Apellidos</label>
+          <input type="text" class="form-control" id="apellidoUsuarioUpdate" placeholder="Herrera"
+            name="apellidoUsuario" [(ngModel)]="usuarioUpdate.apellidoUsuario">
+        </div>
+        <div class="form-group">
+          <label for="correoUsuarioUpdate">Correo</label>
+          <input type="text" class="form-control" id="correoUsuarioUpdate" value="ejemplo@poli.com" name="correoUsuario"
+            [(ngModel)]="usuarioUpdate.correoUsuario">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Rol del Usuario</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option value="1">Coordinador</option>
+            <option value="2">Administrador</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Laboratorio a Coornidar</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option *ngFor="let lab of laboratorios;let i = index" value="{{lab.idLaboratorio}}">
+              {{lab.nombreLaboratorio}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Modificar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #removeUser let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"></h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="delete()" #formUpdate="ngForm">
+      <div class="modal-body text-center">
+        <h3>¿Realmente Deseas eliminar a {{usuarioRemove.nombreUsuario}} {{usuarioRemove.apellidoUsuario}}?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Eliminar</button>
+      </div>
+    </form>
+  </ng-template>
+</div>
+<app-footer></app-footer>
