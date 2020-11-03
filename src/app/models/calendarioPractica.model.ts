@@ -1,7 +1,8 @@
 import { LaboratorioModel } from './laboratorio.model';
 import { UsuarioModel } from './usuario.model';
 
-export class PracticaModel{
+export class CalendarioPracticaModel{
+    idCalendario:number;
     fechaPractica:string;
     horaInicio:string;
     horaFin:string;
@@ -11,5 +12,4 @@ export class PracticaModel{
         this.idUsuario = new UsuarioModel;
         this.idLaboratorio = new LaboratorioModel;
     }
-    
 }

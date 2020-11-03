@@ -1,108 +1,140 @@
 <app-header></app-header>
 <div class="content-main">
-    <button class="btn btn-primary float-right" (click)="modalAddEvent(content)">
-        Agendar Practica
-    </button>
-    <div class="row text-center">
-        <div class="col-md-4">
-            <div class="btn-group">
-                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-                    (viewDateChange)="closeOpenMonthViewDay()">
-                    Anterios
-                </div>
-                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-                    Hoy
-                </div>
-                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-                    (viewDateChange)="closeOpenMonthViewDay()">
-                    Siguiente
-                </div>
-            </div>
+  <button class="btn btn-primary float-right" (click)="modalAddEvent(content)">
+    Agendar Practica
+  </button>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Anterios
         </div>
-        <div class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+          Hoy
         </div>
+        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Siguiente
+        </div>
+      </div>
     </div>
-    <br />
-    <mwl-calendar-month-view   [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-    </mwl-calendar-month-view>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}</h3>
+    </div>
+  </div>
+  <br />
+  <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="openDetails($event.event)" >
+  </mwl-calendar-month-view>
 
-    <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
 
 
-    <ng-template #modalContent let-close="close">
-        <div class="modal-header">
-            <h5 class="modal-title">Event action occurred</h5>
-            <button type="button" class="close" (click)="close()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div>
-                Action:
-                <pre>{{ modalData?.action }}</pre>
-            </div>
-            <div>
-                Event:
-                <pre>{{ modalData?.event | json }}</pre>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="deleteEvent()">
-                Eliminar
-            </button>
-            <button type="button" class="btn btn-outline-secondary" (click)="close()">
-                OK
-            </button>
-        </div>
-    </ng-template>
+  <ng-template #modalContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Event action occurred</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        Coordinador:
+        <pre>{{practicaSeleccionada.idUsuario.nombreUsuario}} {{practicaSeleccionada.idUsuario.apellidoUsuario}}</pre>
+      </div>
+      <div>
+        Fecha:
+        <pre>{{practicaSeleccionada.fechaPractica}} </pre>
+      </div>
+      <div>
+        Hora Inicio:
+        <pre>{{practicaSeleccionada.horaInicio}} </pre>
+      </div>
+      <div>
+        Hora Fin:
+        <pre>{{practicaSeleccionada.horaFin}} </pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="deleteEvent()">
+        Eliminar
+      </button>
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+    </div>
+  </ng-template>
 </div>
 
 
 
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Agendar Practica</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agendar Practica</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="addEvent(formUpdate)" #formUpdate="ngForm">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="fechaPractica">Fecha:</label>
+        <input type="date" class="form-control" id="fechaPractica" name="fechaPractica"
+          [(ngModel)]="calendarioPractica.fechaPractica">
+      </div>
+      <div class="form-group">
+        <label for="horaInicio">Hora Inicio:</label>
+        <input type="time" class="form-control" id="horaInicio" name="horaInicio" [(ngModel)]="calendarioPractica.horaInicio">
+      </div>
+      <div class="form-group">
+        <label for="horaFin">Hora Fin:</label>
+        <input type="time" class="form-control" id="horaFin" name="horaFin" [(ngModel)]="calendarioPractica.horaFin">
+      </div>
+      <div class="form-group">
+        <label for="coordinador">Coordinador:</label>
+        <select class="form-control" id="coordinador" name="idUsuario" [(ngModel)]="calendarioPractica.idUsuario.idUsuario">
+          <option *ngFor="let user of coordinadores;let i = index" value="{{user.idUsuario}}">{{user.nombreUsuario}}
+            {{user.apellidoUsuario}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="idLaboratorio">Laboratorio:</label>
+        <select class="form-control" id="idLaboratorio" name="idLaboratorio"
+          [(ngModel)]="calendarioPractica.idLaboratorio.idLaboratorio">
+          <option *ngFor="let lab of laboratorios;let i = index" value="{{lab.idLaboratorio}}">
+            {{lab.nombreLaboratorio}}</option>
+        </select>
+      </div>
+      <h3>Productos a Utilizar</h3>
+      <table class="table mt-3" datatable>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cantidad Disponible</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productos; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.nombre}}</td>
+            <td>{{product.cantidad}}</td>
+            <td>
+              <button (click)="utilizarProducto(product)" id="element{{product.idProducto}}" class="btn"><i class="fa fa-plus"></i>Utilizar</button>
+              <button (click)="eliminarProducto(product)" id="elementDelete{{product.idProducto}}" class="btn hidden"><i class="fa fa-trash"></i>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <form (ngSubmit)="addEvent(formUpdate)" #formUpdate="ngForm">
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="fechaPractica">Fecha:</label>
-          <input type="date" class="form-control" id="fechaPractica" name="fechaPractica"  [(ngModel)]="practica.fechaPractica">
-        </div>
-        <div class="form-group">
-          <label for="horaInicio">Hora Inicio:</label>
-          <input type="time" class="form-control" id="horaInicio" name="horaInicio" [(ngModel)]="practica.horaInicio">
-        </div>
-        <div class="form-group">
-          <label for="horaFin">Hora Fin:</label>
-          <input type="time" class="form-control" id="horaFin" name="horaFin" [(ngModel)]="practica.horaFin">
-        </div>
-        <div class="form-group">
-          <label for="coordinador">Coordinador:</label>
-          <select class="form-control" id="coordinador" name="idUsuario" [(ngModel)]="practica.idUsuario.idUsuario">
-            <option *ngFor="let user of coordinadores;let i = index" value="{{user.idUsuario}}">{{user.nombreUsuario}}
-                {{user.apellidoUsuario}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="idLaboratorio">Laboratorio:</label>
-          <select class="form-control" id="idLaboratorio"  name="idLaboratorio" [(ngModel)]="practica.idLaboratorio.idLaboratorio">
-            <option *ngFor="let lab of laboratorios;let i = index" value="{{lab.idLaboratorio}}">
-                {{lab.nombreLaboratorio}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Guardar</button>
-      </div>
-    </form>
-  </ng-template>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Agendar Practica</button>
+    </div>
+  </form>
+</ng-template>
 <app-footer></app-footer>

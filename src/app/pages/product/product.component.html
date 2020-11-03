@@ -30,7 +30,8 @@
       </div>
       <div class="form-group col-md-6">
         <label for="desProduct">Descripción:</label>
-        <textarea class="form-control" id="desProduct" rows="3" [(ngModel)]="producto.descripcion" name="descripcion"></textarea>
+        <textarea class="form-control" id="desProduct" rows="3" [(ngModel)]="producto.descripcion"
+          name="descripcion"></textarea>
       </div>
     </div>
 
@@ -62,8 +63,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="cantidadDisponible">Cantidad Disponible</label>
-        <input type="text" class="form-control" id="cantidadDisponible" [(ngModel)]="producto.cantidad"
-          name="cantidad">
+        <input type="text" class="form-control" id="cantidadDisponible" [(ngModel)]="producto.cantidad" name="cantidad">
       </div>
     </div>
 
@@ -96,7 +96,7 @@
         <label for="peligo1">Peligro 1</label>
         <select class="custom-select custom-select-lg mb-3" id="peligo1">
           <option selected>Seleciona el peligro Nº 1</option>
-          <option value="1">One</option>
+          <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
       </div>
     </div>
@@ -105,7 +105,7 @@
         <label for="peligo2">Peligro 2</label>
         <select class="custom-select custom-select-lg mb-3" id="peligo2">
           <option selected>Seleciona el peligro Nº 2</option>
-          <option value="1">One</option>
+          <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
       </div>
     </div>
@@ -114,7 +114,7 @@
         <label for="peligo3">Peligro 3</label>
         <select class="custom-select custom-select-lg mb-3" id="peligo3">
           <option selected>Seleciona el peligro Nº 3</option>
-          <option value="1">One</option>
+          <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
       </div>
     </div>
@@ -123,17 +123,17 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="gre">GRE</label>
-        <input type="text" class="form-control" id="gre">
+        <input type="text" class="form-control" id="gre" [(ngModel)]="riesgoQuimico.gre" name="gre">
       </div>
       <div class="form-group col-md-6">
         <label for="numeroUn">Numero UN</label>
-        <input type="text" class="form-control" id="numeroUn">
+        <input type="text" class="form-control" id="numeroUn" [(ngModel)]="riesgoQuimico.numeroUn" name="numeroUn">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="cas">CAS</label>
-        <input type="text" class="form-control" id="cas">
+        <input type="text" class="form-control" id="cas" [(ngModel)]="riesgoQuimico.cas" name="cas">
       </div>
     </div>
 
@@ -141,53 +141,78 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="carcinogeno">Carcinógeno?</label>
-        <select class="custom-select custom-select-lg mb-3" id="carcinogeno">
-          <option selected>Si</option>
-          <option value="1">No</option>
+        <select class="custom-select custom-select-lg mb-3" id="carcinogeno" [(ngModel)]="riesgoQuimico.cancerigeno"
+          name="cancerigeno">
+          <option value="Si" selected>Si</option>
+          <option value="NO">No</option>
         </select>
       </div>
     </div>
-    <!-- TO DO Categoría IARC: Grupo de valores (1, 2A, 2B, 3, 4, N/A)
-Categoría ACGIH: -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="categoriaIARC">Categoría IARC?</label>
+        <select class="custom-select custom-select-lg mb-3" id="categoriaIARC" [(ngModel)]="riesgoQuimico.categoriaIARC"
+          name="categoriaIARC">
+          <option value="1" selected>1</option>
+          <option value="2A">2A</option>
+          <option value="2B">2B</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="N/A">N/A</option>
+        </select>
+      </div>
+      valores (A1, A2, A3, A4, A5, N/A)
+      <div class="form-group col-md-6">
+        <label for="categoriaACGIH">Categoría ACGIH?</label>
+        <select class="custom-select custom-select-lg mb-3" id="categoriaACGIH"
+          [(ngModel)]="riesgoQuimico.categoriaACGIH" name="categoriaACGIH">
+          <option value="A1" selected>A1</option>
+          <option value="A2">A2</option>
+          <option value="A3">A3</option>
+          <option value="A4">A4</option>
+          <option value="A5">A5</option>
+          <option value="N/A">N/A</option>
+        </select>
+      </div>
+    </div>
 
     <h6><small>NFPA</small></h6>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="salud">Salud:</label>
-        <select class="custom-select custom-select-lg mb-3" id="salud">
-          <option selected>1</option>
-          <option value="1">2</option>
-          <option value="1">3</option>
-          <option value="1">4</option>
+        <label for="nfpaS">Salud:</label>
+        <select class="custom-select custom-select-lg mb-3" id="nfpaS" [(ngModel)]="riesgoQuimico.nfpaS" name="nfpaS">
+          <option value="1" selected>1</option>
+          <option value="3">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
         </select>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="inflamabilidad">Inflamabilidad::</label>
-        <select class="custom-select custom-select-lg mb-3" id="inflamabilidad">
-          <option selected>1</option>
-          <option value="1">2</option>
-          <option value="1">3</option>
-          <option value="1">4</option>
+        <label for="nfpaI">Inflamabilidad::</label>
+        <select class="custom-select custom-select-lg mb-3" id="nfpaI" [(ngModel)]="riesgoQuimico.nfpaI" name="nfpaI">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
         </select>
       </div>
       <div class="form-group col-md-6">
-        <label for="reactividad">Reactividad</label>
-        <select class="custom-select custom-select-lg mb-3" id="reactividad">
-          <option selected>1</option>
-          <option value="1">2</option>
-          <option value="1">3</option>
-          <option value="1">4</option>
+        <label for="nfpaR">Reactividad</label>
+        <select class="custom-select custom-select-lg mb-3" id="nfpaR" [(ngModel)]="riesgoQuimico.nfpaR" name="nfpaR">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
         </select>
       </div>
       <!-- TO DO simbolos reactivos  -->
       <div class="form-group col-md-6">
-        <label for="especifico">Especifico:</label>
-        <select class="custom-select custom-select-lg mb-3" id="especifico">
-          <option selected>1</option>
-          <option value="1">2</option>
-          <option value="1">3</option>
-          <option value="1">4</option>
+        <label for="nfpaE">Especifico:</label>
+        <select class="custom-select custom-select-lg mb-3" id="nfpaE" [(ngModel)]="riesgoQuimico.nfpaE" name="nfpaE">
+          <option value="Reactivo con agua" selected>Reactivo con agua</option>
+          <option value="oxidante(OX)">oxidante(OX)</option>
+          <option value="asfixiante simple (AS)">asfixiante simple (AS)</option>
         </select>
       </div>
     </div>
@@ -225,10 +250,8 @@ Categoría ACGIH: -->
     Ambiental:
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select class="custom-select custom-select-lg mb-3" id="ambiental">
-          <option selected>Peligro para el medio ambiente acuático</option>
-          <option value="1">Peligro para la capa de ozono</option>
-          <option value="1">N.A</option>
+        <select class="custom-select custom-select-lg mb-3" id="ambiental" [(ngModel)]="riesgoQuimico.idSGAAmbientalFk.id" name="id">
+          <option *ngFor="let sga of sgaAmbiental;let i = index;"  value="{{sga.id}}" > {{sga.descripcion}}</option>
         </select>
       </div>
     </div>
@@ -267,21 +290,21 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="reactividadTXT">Reactividad:</label>
-        <textarea class="form-control" id="reactividadTXT" rows="3"></textarea>
+        <textarea class="form-control" id="reactividadTXT" rows="3" [(ngModel)]="riesgoQuimico.reactividad" name="reactividad"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="estabilidadQuimica">Estabilidad química:</label>
-        <textarea class="form-control" id="estabilidadQuimica" rows="3"></textarea>
+        <textarea class="form-control" id="estabilidadQuimica" rows="3" [(ngModel)]="riesgoQuimico.estabilidadQuimica" name="estabilidadQuimica"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="reaccionesPeligrosas">Reacciones peligrosas:</label>
-        <textarea class="form-control" id="reaccionesPeligrosas" rows="3"></textarea>
+        <textarea class="form-control" id="reaccionesPeligrosas" rows="3" [(ngModel)]="riesgoQuimico.reaccionesPeligrosas" name="reaccionesPeligrosas"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="sustanciasIncopatibles">Sustancias incompatibles:</label>
-        <textarea class="form-control" id="sustanciasIncopatibles" rows="3"></textarea>
+        <textarea class="form-control" id="sustanciasIncopatibles" rows="3" [(ngModel)]="riesgoQuimico.sustanciasIncompatibles" name="sustanciasIncompatibles"></textarea>
       </div>
     </div>
 
@@ -290,17 +313,17 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="twa">TWA</label>
-        <input type="text" class="form-control" id="twa">
+        <input type="text" class="form-control" id="twa" [(ngModel)]="riesgoQuimico.twa" name="twa">
       </div>
       <div class="form-group col-md-6">
         <label for="stel">STEL</label>
-        <input type="text" class="form-control" id="stel">
+        <input type="text" class="form-control" id="stel" [(ngModel)]="riesgoQuimico.stell" name="stell">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="tlv_c">TLV-C:</label>
-        <input type="text" class="form-control" id="tlv_c">
+        <input type="text" class="form-control" id="tlv_c" [(ngModel)]="riesgoQuimico.tlvC" name="tlvC">
       </div>
     </div>
 
@@ -309,27 +332,27 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inhalacionPeligro">Inhalación:</label>
-        <textarea class="form-control" id="inhalacionPeligro" rows="3"></textarea>
+        <textarea class="form-control" id="inhalacionPeligro" rows="3" [(ngModel)]="riesgoQuimico.peligroInhalacion" name="peligroInhalacion"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="ingestionPeligro">Ingestión:</label>
-        <textarea class="form-control" id="ingestionPeligro" rows="3"></textarea>
+        <textarea class="form-control" id="ingestionPeligro" rows="3" [(ngModel)]="riesgoQuimico.peligroIngestion" name="peligroIngestion"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="pielPeligro">Piel:</label>
-        <textarea class="form-control" id="pielPeligro" rows="3"></textarea>
+        <textarea class="form-control" id="pielPeligro" rows="3" [(ngModel)]="riesgoQuimico.peligroPiel" name="peligroPiel"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="ojosPeligro">Ojos:</label>
-        <textarea class="form-control" id="ojosPeligro" rows="3"></textarea>
+        <textarea class="form-control" id="ojosPeligro" rows="3" [(ngModel)]="riesgoQuimico.peligroOjos" name="peligroOjos"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="efectosCronicos">Efectos crónicos:</label>
-        <textarea class="form-control" id="efectosCronicos" rows="3"></textarea>
+        <textarea class="form-control" id="efectosCronicos" rows="3" [(ngModel)]="riesgoQuimico.efectosCronicos" name="efectosCronicos"></textarea>
       </div>
     </div>
 
@@ -338,31 +361,31 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="mpRespiratoria">Respiratoria:</label>
-        <textarea class="form-control" id="mpRespiratoria" rows="3"></textarea>
+        <textarea class="form-control" id="mpRespiratoria" rows="3" [(ngModel)]="riesgoQuimico.medidasRespiratorias" name="medidasRespiratorias"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="mpManos">Manos:</label>
-        <textarea class="form-control" id="mpManos" rows="3"></textarea>
+        <textarea class="form-control" id="mpManos" rows="3" [(ngModel)]="riesgoQuimico.medidasManos" name="medidasManos"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="mpOjos">Ojos:</label>
-        <textarea class="form-control" id="mpOjos" rows="3"></textarea>
+        <textarea class="form-control" id="mpOjos" rows="3" [(ngModel)]="riesgoQuimico.medidasOjos" name="medidasOjos"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="mpPiel">Piel:</label>
-        <textarea class="form-control" id="mpPiel" rows="3"></textarea>
+        <textarea class="form-control" id="mpPiel" rows="3" [(ngModel)]="riesgoQuimico.medidasPiel" name="medidasPiel"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="mpHigiene">Medidas de higiene:</label>
-        <textarea class="form-control" id="mpHigiene" rows="3"></textarea>
+        <textarea class="form-control" id="mpHigiene" rows="3" [(ngModel)]="riesgoQuimico.medidasHigiene" name="medidasHigiene"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="mpControlIngenieria">Controles de ingeniería</label>
-        <textarea class="form-control" id="mpControlIngenieria" rows="3"></textarea>
+        <textarea class="form-control" id="mpControlIngenieria" rows="3" [(ngModel)]="riesgoQuimico.medidasControlIng" name="medidasControlIng"></textarea>
       </div>
     </div>
 
@@ -371,11 +394,11 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="almacenamiento">Almacenamiento:</label>
-        <textarea class="form-control" id="almacenamientos" rows="3"></textarea>
+        <textarea class="form-control" id="almacenamientos" rows="3" [(ngModel)]="riesgoQuimico.medidasAlmacenamiento" name="medidasAlmacenamiento"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="manipulacion">Manipulación:</label>
-        <textarea class="form-control" id="manipulacion" rows="3"></textarea>
+        <textarea class="form-control" id="manipulacion" rows="3" [(ngModel)]="riesgoQuimico.medidasManipulacion" name="medidasManipulacion"></textarea>
       </div>
     </div>
 
@@ -384,27 +407,27 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="prInhalacion">Inhalación:</label>
-        <textarea class="form-control" id="almacenamientos" rows="3"></textarea>
+        <textarea class="form-control" id="almacenamientos" rows="3" [(ngModel)]="riesgoQuimico.prAuxInhalacion" name="prAuxInhalacion"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="prIngestion">Ingestión:</label>
-        <textarea class="form-control" id="prIngestion" rows="3"></textarea>
+        <textarea class="form-control" id="prIngestion" rows="3" [(ngModel)]="riesgoQuimico.prAuxIngestion" name="prAuxIngestion"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="prContactoPiel">Contacto piel:</label>
-        <textarea class="form-control" id="prContactoPiel" rows="3"></textarea>
+        <textarea class="form-control" id="prContactoPiel" rows="3" [(ngModel)]="riesgoQuimico.prAuxPiel" name="prAuxPiel"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="prContactoOjos">Contacto ojos:</label>
-        <textarea class="form-control" id="prContactoOjos" rows="3"></textarea>
+        <textarea class="form-control" id="prContactoOjos" rows="3" [(ngModel)]="riesgoQuimico.prAuxOjos" name="prAuxOjos"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="prOtrasMedidas">Otras Medidas:</label>
-        <textarea class="form-control" id="prOtrasMedidas" rows="3"></textarea>
+        <textarea class="form-control" id="prOtrasMedidas" rows="3" [(ngModel)]="riesgoQuimico.prAuxOtras" name="prAuxOtras"></textarea>
       </div>
     </div>
 
@@ -413,21 +436,21 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="aeIncendio">Peligros específicos incendio:</label>
-        <textarea class="form-control" id="aeIncendio" rows="3"></textarea>
+        <textarea class="form-control" id="aeIncendio" rows="3" [(ngModel)]="riesgoQuimico.peligroEspIncendio" name="peligroEspIncendio"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="aeSalud">Peligros específicos para la salud:</label>
-        <textarea class="form-control" id="prIngestion" rows="3"></textarea>
+        <textarea class="form-control" id="prIngestion" rows="3" [(ngModel)]="riesgoQuimico.peligroEspSalud" name="peligroEspSalud"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="aeLuchaIncendio">Recomendaciones del personal de lucha contra incendio:</label>
-        <textarea class="form-control" id="aeLuchaIncendio" rows="3"></textarea>
+        <textarea class="form-control" id="aeLuchaIncendio" rows="3" [(ngModel)]="riesgoQuimico.recomendacionIncendio" name="recomendacionIncendio"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label for="aeAgenteExtindor">Agente extintor:</label>
-        <textarea class="form-control" id="prContactoOjos" rows="3"></textarea>
+        <textarea class="form-control" id="prContactoOjos" rows="3" [(ngModel)]="riesgoQuimico.agenteExtintor" name="agenteExtintor"></textarea>
       </div>
     </div>
 
@@ -435,13 +458,13 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="aeDerrames">Precauciones personales, equipo de protección y medio ambiente:</label>
-        <textarea class="form-control" id="aeDerrames" rows="5"></textarea>
+        <textarea class="form-control" id="aeDerrames" rows="5" [(ngModel)]="riesgoQuimico.ctrolProctecFuga" name="ctrolProctecFuga"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="aeContencion">Métodos y material de contención y limpieza:</label>
-        <textarea class="form-control" id="aeContencion" rows="5"></textarea>
+        <textarea class="form-control" id="aeContencion" rows="5" [(ngModel)]="riesgoQuimico.ctrolLimpieza" name="ctrolLimpieza"></textarea>
       </div>
     </div>
 
@@ -449,16 +472,16 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="fichaSeguridadFisica">Cuenta con ficha de seguridad fisica?</label>
-        <select class="custom-select custom-select-lg" id="fichaSeguridadFisica">
-          <option selected>Si</option>
-          <option value="1">NO</option>
+        <select class="custom-select custom-select-lg" id="fichaSeguridadFisica" [(ngModel)]="riesgoQuimico.fichaSeguridad" name="fichaSeguridad">
+          <option value="SI" selected>SI</option>
+          <option value="NO">NO</option>
         </select>
       </div>
       <div class="form-group col-md-6">
         <label for="tarjetaEmergenciaFisica">Cuenta con tarjeta de emergencia fisica?</label>
-        <select class="custom-select custom-select-lg" id="tarjetaEmergenciaFisica">
-          <option selected>Si</option>
-          <option value="1">NO</option>
+        <select class="custom-select custom-select-lg" id="tarjetaEmergenciaFisica" [(ngModel)]="riesgoQuimico.tarjetaEmergencia" name="tarjetaEmergencia">
+          <option value="SI" selected>SI</option>
+          <option value="NO">NO</option>
         </select>
       </div>
     </div>
@@ -466,7 +489,7 @@ Categoría ACGIH: -->
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="palabrasAdvertencia">Palabras de advertencia</label>
-        <input type="text" class="form-control" id="palabrasAdvertencia">
+        <input type="text" class="form-control" id="palabrasAdvertencia" [(ngModel)]="riesgoQuimico.palabraEmergencia" name="palabraEmergencia">
       </div>
     </div>
 
@@ -502,8 +525,8 @@ Categoría ACGIH: -->
 
     <div class="form-row">
       <div class="form-group">
-        <label for="exampleFormControlFile1">Imagen con el código QR asociado</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <label for="imagen">Imagen con el código QR asociado</label>
+        <input type="file" class="form-control-file" id="imagen" [(ngModel)]="riesgoQuimico.imagen" name="imagen">
       </div>
     </div>
 

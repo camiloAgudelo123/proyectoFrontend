@@ -6,6 +6,11 @@ import { ProductService } from 'src/app/service/product/product.service';
 import { RiesgoQuimicoModel } from 'src/app/models/riesgoQuimico.model';
 import { RiesgoQuimicoService } from 'src/app/service/riesgoQuimico/riesgo-quimico.service';
 import { showErrorAlert } from 'src/app/app.component';
+import { SgaAmbientalModel } from 'src/app/models/sgaambiental.model';
+import { SgaAmbientalService } from 'src/app/service/sgaAmbiental/sga-ambiental.service';
+import { PeligrosidadNTCModel } from 'src/app/models/peligrosidadNTC.model';
+import { PeligrosidadNtcService } from 'src/app/service/peligrosidadNtc/peligrosidad-ntc.service';
+import { ProductoPracticaService } from 'src/app/service/productoPractica/producto-practica.service';
 
 @Component({
   selector: 'app-product',
@@ -16,10 +21,27 @@ export class ProductComponent implements OnInit {
 
   producto: ProductoModel = new ProductoModel();
   riesgoQuimico: RiesgoQuimicoModel = new RiesgoQuimicoModel;
+  sgaAmbiental:SgaAmbientalModel[] =[]; 
+  peligrosidadNTC:PeligrosidadNTCModel[] =[]; 
 
-  constructor(private productoService: ProductService,private riesgosQuimicosService:RiesgoQuimicoService) { }
+  constructor(private productoService: ProductService,private riesgosQuimicosService:RiesgoQuimicoService,private sgaAmbientalService:SgaAmbientalService,
+    private peligrosidadNTCService:PeligrosidadNtcService) { }
 
   ngOnInit() {
+    this.sgaAmbientalService.findAll().subscribe(
+      response => {
+       this.sgaAmbiental = response;
+      },
+      error => {
+        showErrorAlert('Se produjo un error creando los SGA ambientales.');
+      });
+    this.peligrosidadNTCService.findAll().subscribe(
+      response => {
+       this.peligrosidadNTC = response;
+      },
+      error => {
+        showErrorAlert('Se produjo un error creando la peligrosidad NTC.');
+      });
   }
   save(form: NgForm) {
     if (form.valid) {

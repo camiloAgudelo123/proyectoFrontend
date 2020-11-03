@@ -9,10 +9,9 @@ import { SgaSaludModel } from './sgasalud.model';
 export class RiesgoQuimicoModel{
     idRiesgo:number;
     idProductoFk: ProductoModel;
-    idPeligrosidadNTC1692Fk:PeligrosidadNTCModel;
     gre:number;
     numeroUn:string;
-    gas:string;
+    cas:string;
     cancerigeno:string;
     categoriaIARC:string;
     categoriaACGIH:string;
@@ -20,15 +19,14 @@ export class RiesgoQuimicoModel{
     nfpaI:number;
     nfpaR:number;
     nfpaE:string;
-    idSGAFisicoFk:SgaFisicoModel;
     idSGAAmbientalFk:SgaAmbientalModel;
-    idSGASaludFk:SgaSaludModel;
     reactividad:string;
     estabilidadQuimica:string;
     reaccionesPeligrosas:string;
     sustanciasIncompatibles:string;
     twa:string;
     stell:string;
+    tlvC:string;
     peligroInhalacion:string;
     peligroIngestion:string;
     peligroPiel:string;
@@ -57,15 +55,8 @@ export class RiesgoQuimicoModel{
     tarjetaEmergencia:string;
     palabraEmergencia:string;
     imagen:string;
-    idFrasesPFk:FrasesPModel;
-    idFrasesHFk:FrasesHModel;
     constructor(){
         this.idProductoFk = new ProductoModel;
-        this.idPeligrosidadNTC1692Fk = new PeligrosidadNTCModel;
-        this.idSGAFisicoFk = new SgaFisicoModel;
         this.idSGAAmbientalFk = new SgaAmbientalModel;
-        this.idSGASaludFk  = new SgaSaludModel;
-        this.idFrasesPFk = new FrasesPModel;
-        this.idFrasesHFk = new FrasesHModel;
     }
 }
