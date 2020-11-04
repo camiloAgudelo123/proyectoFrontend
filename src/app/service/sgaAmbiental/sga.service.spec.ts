@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SgaAmbientalService } from './sga-ambiental.service';
+import { SgaService } from './sga.service';
 
 describe('SgaAmbientalService', () => {
-  let service: SgaAmbientalService;
+  let service: SgaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SgaAmbientalService);
+    service = TestBed.inject(SgaService);
   });
 
   it('should be created', () => {

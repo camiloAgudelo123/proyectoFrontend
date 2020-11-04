@@ -153,6 +153,7 @@ export class PracticaComponent implements OnInit {
         response => {
           console.log("Prductos registrados en la practica");
           console.log(response);
+          this.productosUtilizarPractica  = [];
         },
         error => {
           showErrorAlert('Se produjo un error guardando los productos que se utilizaran en la practica.');

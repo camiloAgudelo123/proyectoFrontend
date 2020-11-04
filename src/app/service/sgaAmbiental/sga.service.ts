@@ -6,12 +6,12 @@ import { SgaAmbientalModel } from 'src/app/models/sgaambiental.model';
 @Injectable({
   providedIn: 'root'
 })
-export class SgaAmbientalService {
-  private url = "http://localhost:5000/sgaambiental"
+export class SgaService {
+  private url = "http://localhost:5000/";
   constructor(private http: HttpClient) { }
 
-  findAll() {
-    return this.http.get(`${this.url}`).pipe(
+  findAll(type:string) {
+    return this.http.get(`${this.url}/${type}`).pipe(
       map(this.getResponseArray)
     );
   }

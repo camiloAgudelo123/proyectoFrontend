@@ -94,7 +94,7 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="peligo1">Peligro 1</label>
-        <select class="custom-select custom-select-lg mb-3" id="peligo1">
+        <select class="custom-select custom-select-lg mb-3" id="peligo1" [(ngModel)]="riesgoQuimicoPeligro1.fkPeligro" name="fkPeligro">
           <option selected>Seleciona el peligro Nº 1</option>
           <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
@@ -103,7 +103,7 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="peligo2">Peligro 2</label>
-        <select class="custom-select custom-select-lg mb-3" id="peligo2">
+        <select class="custom-select custom-select-lg mb-3" id="peligo2" [(ngModel)]="riesgoQuimicoPeligro2.fkPeligro" name="fkPeligro">
           <option selected>Seleciona el peligro Nº 2</option>
           <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
@@ -112,7 +112,7 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="peligo3">Peligro 3</label>
-        <select class="custom-select custom-select-lg mb-3" id="peligo3">
+        <select class="custom-select custom-select-lg mb-3" id="peligo3" [(ngModel)]="riesgoQuimicoPeligro3.fkPeligro" name="fkPeligro">
           <option selected>Seleciona el peligro Nº 3</option>
           <option *ngFor="let peligrosidad of peligrosidadNTC; let i = index" value="{{peligrosidad.id}}">{{peligrosidad.codigo}}-{{peligrosidad.descripcion}}</option>
         </select>
@@ -221,29 +221,9 @@
     <h6><small>Sistema Globalmente Armonizado</small></h6>
     Físico:
     <div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="explosivos" value="explosivos">
-        <label class="form-check-label" for="explosivos">Explosivos</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inflamable," value="inflamable">
-        <label class="form-check-label" for="inflamable">Inflamable</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="comburente" value="comburente">
-        <label class="form-check-label" for="comburente">Comburente</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="gasPresion" value="gasPresion">
-        <label class="form-check-label" for="gasPresion">Gas a presión</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="corrosivoMetales" value="corrosivoMetales">
-        <label class="form-check-label" for="corrosivoMetales">Corrosivo para metales</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="na" value="na">
-        <label class="form-check-label" for="na">N.A</label>
+      <div class="form-check form-check-inline" *ngFor="let element of sgaFisico;let i = index;">
+        <input class="form-check-input"  type="checkbox" id="sgaF{{element.id}}"  (click)="crearSgaFisico(element.id)">
+        <label class="form-check-label" for="sgaF{{element.id}}">{{element.descripcion}}</label>
       </div>
     </div>
     <br>
@@ -251,36 +231,16 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <select class="custom-select custom-select-lg mb-3" id="ambiental" [(ngModel)]="riesgoQuimico.idSGAAmbientalFk.id" name="id">
-          <option *ngFor="let sga of sgaAmbiental;let i = index;"  value="{{sga.id}}" > {{sga.descripcion}}</option>
+          <option *ngFor="let sga of sgaAmbiental;let i = index;"  value="{{sga.id}}"> {{sga.descripcion}}</option>
         </select>
       </div>
     </div>
 
     Salud:
     <div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="mortalToxico" value="mortalToxico">
-        <label class="form-check-label" for="mortalToxico">Mortal/Toxico</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="corrosivoPiel," value="corrosivoPiel">
-        <label class="form-check-label" for="corrosivoPiel">Corrosivo para la piel</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="comburente" value="comburente">
-        <label class="form-check-label" for="comburente">Comburente</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="Nocivo" value="Nocivo">
-        <label class="form-check-label" for="Nocivo">Nocivo</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="peligroSalud" value="peligroSalud">
-        <label class="form-check-label" for="peligroSalud">Peligroso para la salud</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="SaludNA" value="SaludNA">
-        <label class="form-check-label" for="SaludNA">N.A</label>
+      <div class="form-check form-check-inline" *ngFor="let element of sgaSalud;let i = index;">
+        <input class="form-check-input"  type="checkbox" id="sgaS{{element.id}}"  (click)="crearSgaSalud(element.id)">
+        <label class="form-check-label" for="sgaS{{element.id}}">{{element.descripcion}}</label>
       </div>
     </div>
     <br>
