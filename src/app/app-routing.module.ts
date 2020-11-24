@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'productos', component: ProductsComponent},
   {path:'producto/nuevo', component: ProductComponent},
   {path:'productos/:', component: ModificarProductoComponent},
-  {path:'**:', pathMatch: 'full',component:ProductsComponent},
+  {path:'**:', pathMatch: 'full',component:HomeComponent},
 ];
 
 @NgModule({
